@@ -9,8 +9,10 @@ pub mod money {
             Dollar { amount }
         }
 
-        pub fn times(&mut self, multiplier: i32) {
-            self.amount *= multiplier;
+        pub fn times(&self, multiplier: i32) -> Dollar {
+            Dollar {
+                amount: self.amount * multiplier,
+            }
         }
     }
 }
