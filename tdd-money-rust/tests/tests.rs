@@ -21,4 +21,5 @@ fn equality() {
     assert_ne!(money::Dollar::new(5), money::Dollar::new(6));
     assert_eq!(money::Franc::new(5), money::Franc::new(5));
     assert_ne!(money::Franc::new(5), money::Franc::new(6));
+    assert_ne!(money::Franc::new(5), money::Dollar::new(5));
 }
