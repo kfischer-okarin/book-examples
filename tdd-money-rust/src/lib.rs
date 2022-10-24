@@ -24,6 +24,13 @@ pub mod money {
             self.currency
         }
 
+        pub fn plus(&self, addend: &Money) -> Money {
+            Money {
+                amount: self.amount + addend.amount,
+                currency: self.currency,
+            }
+        }
+
         pub fn times(&self, multiplier: i32) -> Money {
             Money {
                 amount: self.amount * multiplier,
