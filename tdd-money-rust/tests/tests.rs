@@ -8,3 +8,10 @@ fn multiplication() {
     let product = five.times(3);
     assert_eq!(product.amount, 15);
 }
+
+
+#[test]
+fn equality() {
+    assert_eq!(money::Dollar::new(5), money::Dollar::new(5));
+    assert_ne!(money::Dollar::new(5), money::Dollar::new(6));
+}
