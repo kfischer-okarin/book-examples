@@ -14,6 +14,13 @@ pub mod money {
             Money::Franc { amount }
         }
 
+        pub fn currency(&self) -> &str {
+            match self {
+                Money::Dollar { .. } => "USD",
+                Money::Franc { .. } => "CHF",
+            }
+        }
+
         pub fn times(&self, multiplier: i32) -> Money {
             match self {
                 Money::Dollar { amount } => Money::Dollar {
