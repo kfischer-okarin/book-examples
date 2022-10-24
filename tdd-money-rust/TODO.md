@@ -10,3 +10,4 @@
 - [x] Common equality
 - [ ] Common times
 - [x] Compare Francs with Dollars
+- [ ] Currency?
