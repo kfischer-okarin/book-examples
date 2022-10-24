@@ -3,5 +3,5 @@
 - [ ] Make `amount` private
 - [x] Dollar side-effects?
 - [ ] Money rounding?
-- [ ] Equality
+- [x] Equality
 - [ ] Hash code

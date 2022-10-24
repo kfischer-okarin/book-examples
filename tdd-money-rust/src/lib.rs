@@ -1,5 +1,5 @@
 pub mod money {
-    #[derive(Debug)]
+    #[derive(Debug, PartialEq)]
     pub struct Dollar {
         pub amount: i32,
     }
