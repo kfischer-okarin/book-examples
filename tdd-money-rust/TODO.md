@@ -5,3 +5,4 @@
 - [ ] Money rounding?
 - [x] Equality
 - [ ] Hash code
+- [ ] 5 CHF * 2 = 10 CHF
