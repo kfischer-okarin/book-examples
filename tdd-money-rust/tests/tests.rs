@@ -8,6 +8,13 @@ fn multiplication() {
 }
 
 #[test]
+fn simple_addition() {
+    let five = money::Money::dollar(5);
+    let sum = five.plus(&money::Money::dollar(5));
+    assert_eq!(money::Money::dollar(10), sum);
+}
+
+#[test]
 fn currency() {
     assert_eq!("USD", money::Money::dollar(1).currency());
     assert_eq!("CHF", money::Money::franc(1).currency());
