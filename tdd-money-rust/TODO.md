@@ -7,5 +7,5 @@
 - [ ] Hash code
 - [x] 5 CHF * 2 = 10 CHF
 - [ ] Dollar/Franc duplication
-- [ ] Common equality
+- [x] Common equality
 - [ ] Common times
