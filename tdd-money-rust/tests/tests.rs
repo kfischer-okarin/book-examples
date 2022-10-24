@@ -14,6 +14,11 @@ fn franc_multiplication() {
     assert_eq!(money::Money::franc(15), five.times(3));
 }
 
+#[test]
+fn currency() {
+    assert_eq!("USD", money::Money::dollar(1).currency());
+    assert_eq!("CHF", money::Money::franc(1).currency());
+}
 
 #[test]
 fn equality() {
