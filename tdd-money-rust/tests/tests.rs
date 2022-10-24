@@ -1,4 +1,5 @@
 use tdd_money_rust::money;
+use tdd_money_rust::money::Expression;
 
 #[test]
 fn multiplication() {
@@ -12,7 +13,7 @@ fn simple_addition() {
     let five = money::Money::dollar(5);
     let sum = five.plus(&five);
     let bank = money::Bank::new();
-    let reduced = bank.reduce(&sum, "USD");
+    let reduced = bank.reduce(&*sum, "USD");
     assert_eq!(money::Money::dollar(10), reduced);
 }
 
