@@ -1,14 +1,3 @@
 - [ ] $5 + 10 CHF = $10 if rate is 2:1
-- [x] $5 * 2 = $10
-- [x] Make `amount` private
-- [x] Dollar side-effects?
-- [ ] Money rounding?
-- [x] Equality
-- [ ] Hash code
-- [x] 5 CHF * 2 = 10 CHF
-- [x] Dollar/Franc duplication
-- [x] Common equality
-- [x] Common times
-- [x] Compare Francs with Dollars
-- [x] Currency?
-- [x] Delete franc_multiplication test?
+- [ ] $5 + $5 = $10
+
