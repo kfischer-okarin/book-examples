@@ -2,24 +2,24 @@ use tdd_money_rust::money;
 
 #[test]
 fn multiplication() {
-    let five = money::Dollar::new(5);
-    assert_eq!(money::Dollar::new(10), five.times(2));
-    assert_eq!(money::Dollar::new(15), five.times(3));
+    let five = money::Money::dollar(5);
+    assert_eq!(money::Money::dollar(10), five.times(2));
+    assert_eq!(money::Money::dollar(15), five.times(3));
 }
 
 #[test]
 fn franc_multiplication() {
-    let five = money::Franc::new(5);
-    assert_eq!(money::Franc::new(10), five.times(2));
-    assert_eq!(money::Franc::new(15), five.times(3));
+    let five = money::Money::franc(5);
+    assert_eq!(money::Money::franc(10), five.times(2));
+    assert_eq!(money::Money::franc(15), five.times(3));
 }
 
 
 #[test]
 fn equality() {
-    assert_eq!(money::Dollar::new(5), money::Dollar::new(5));
-    assert_ne!(money::Dollar::new(5), money::Dollar::new(6));
-    assert_eq!(money::Franc::new(5), money::Franc::new(5));
-    assert_ne!(money::Franc::new(5), money::Franc::new(6));
-    assert_ne!(money::Franc::new(5), money::Dollar::new(5));
+    assert_eq!(money::Money::dollar(5), money::Money::dollar(5));
+    assert_ne!(money::Money::dollar(5), money::Money::dollar(6));
+    assert_eq!(money::Money::franc(5), money::Money::franc(5));
+    assert_ne!(money::Money::franc(5), money::Money::franc(6));
+    assert_ne!(money::Money::franc(5), money::Money::dollar(5));
 }

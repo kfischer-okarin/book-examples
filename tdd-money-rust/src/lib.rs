@@ -5,15 +5,15 @@ pub mod money {
         Franc { amount: i32 },
     }
 
-    pub struct Dollar {}
-
-    impl Dollar {
-        pub fn new(amount: i32) -> Money {
+    impl Money {
+        pub fn dollar(amount: i32) -> Money {
             Money::Dollar { amount }
         }
-    }
 
-    impl Money {
+        pub fn franc(amount: i32) -> Money {
+            Money::Franc { amount }
+        }
+
         pub fn times(&self, multiplier: i32) -> Money {
             match self {
                 Money::Dollar { amount } => Money::Dollar {
@@ -23,14 +23,6 @@ pub mod money {
                     amount: amount * multiplier,
                 },
             }
-        }
-    }
-
-    pub struct Franc {}
-
-    impl Franc {
-        pub fn new(amount: i32) -> Money {
-            Money::Franc { amount }
         }
     }
 }
