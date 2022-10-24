@@ -9,3 +9,4 @@
 - [ ] Dollar/Franc duplication
 - [x] Common equality
 - [ ] Common times
+- [ ] Compare Francs with Dollars
