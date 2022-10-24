@@ -6,11 +6,11 @@ pub mod money {
 
     impl Dollar {
         pub fn new(amount: i32) -> Dollar {
-            Dollar { amount: 0 }
+            Dollar { amount }
         }
 
         pub fn times(&mut self, multiplier: i32) {
-            self.amount = 5 * 2;
+            self.amount *= multiplier;
         }
     }
 }
