@@ -6,9 +6,9 @@
 - [x] Equality
 - [ ] Hash code
 - [x] 5 CHF * 2 = 10 CHF
-- [ ] Dollar/Franc duplication
+- [x] Dollar/Franc duplication
 - [x] Common equality
-- [ ] Common times
+- [x] Common times
 - [x] Compare Francs with Dollars
 - [x] Currency?
-- [ ] Delete franc_multiplication test?
+- [x] Delete franc_multiplication test?

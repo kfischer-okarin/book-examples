@@ -1,36 +1,33 @@
 pub mod money {
     #[derive(Debug, PartialEq)]
-    pub enum Money<'a> {
-        Dollar { amount: i32, currency: &'a str },
-        Franc { amount: i32, currency: &'a str },
+    pub struct Money {
+        amount: i32,
+        currency: &'static str,
     }
 
-    impl Money<'_> {
-        pub fn dollar(amount: i32) -> Money<'static> {
-            Money::Dollar {
+    impl Money {
+        pub fn dollar(amount: i32) -> Money {
+            Money {
                 amount,
                 currency: "USD",
             }
         }
 
-        pub fn franc(amount: i32) -> Money<'static> {
-            Money::Franc {
+        pub fn franc(amount: i32) -> Money {
+            Money {
                 amount,
                 currency: "CHF",
             }
         }
 
         pub fn currency(&self) -> &str {
-            match self {
-                Money::Dollar { currency, .. } => currency,
-                Money::Franc { currency, .. } => currency,
-            }
+            self.currency
         }
 
         pub fn times(&self, multiplier: i32) -> Money {
-            match self {
-                Money::Dollar { amount, .. } => Money::dollar(amount * multiplier),
-                Money::Franc { amount, .. } => Money::franc(amount * multiplier),
+            Money {
+                amount: self.amount * multiplier,
+                currency: self.currency,
             }
         }
     }
