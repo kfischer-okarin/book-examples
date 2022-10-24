@@ -22,8 +22,8 @@ pub mod money {
 
         pub fn currency(&self) -> &str {
             match self {
-                Money::Dollar { .. } => "USD",
-                Money::Franc { .. } => "CHF",
+                Money::Dollar { currency, .. } => currency,
+                Money::Franc { currency, .. } => currency,
             }
         }
 

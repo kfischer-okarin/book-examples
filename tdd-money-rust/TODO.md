@@ -10,5 +10,5 @@
 - [x] Common equality
 - [ ] Common times
 - [x] Compare Francs with Dollars
-- [ ] Currency?
+- [x] Currency?
 - [ ] Delete franc_multiplication test?
