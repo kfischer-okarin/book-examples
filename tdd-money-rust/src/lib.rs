@@ -23,12 +23,8 @@ pub mod money {
 
         pub fn times(&self, multiplier: i32) -> Money {
             match self {
-                Money::Dollar { amount } => Money::Dollar {
-                    amount: amount * multiplier,
-                },
-                Money::Franc { amount } => Money::Franc {
-                    amount: amount * multiplier,
-                },
+                Money::Dollar { amount } => Money::dollar(amount * multiplier),
+                Money::Franc { amount } => Money::franc(amount * multiplier),
             }
         }
     }
