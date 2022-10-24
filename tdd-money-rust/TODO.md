@@ -11,3 +11,4 @@
 - [ ] Common times
 - [x] Compare Francs with Dollars
 - [ ] Currency?
+- [ ] Delete franc_multiplication test?
