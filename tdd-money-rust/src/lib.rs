@@ -1,6 +1,7 @@
 pub mod money {
     pub trait Expression {
-        fn plus(&self, addend: &Money) -> Box<dyn Expression>;
+        fn plus<'a>(&'a self, addend: &'a Money) -> Box<dyn Expression + 'a>;
+        fn reduce(&self, to: &'static str) -> Money;
     }
 
     #[derive(Debug, PartialEq)]
@@ -37,11 +38,41 @@ pub mod money {
     }
 
     impl Expression for Money {
-        fn plus(&self, addend: &Money) -> Box<dyn Expression> {
+        fn plus<'a>(&'a self, addend: &'a Money) -> Box<dyn Expression + 'a> {
+            Box::new(Sum::new(self, addend))
+        }
+
+        fn reduce(&self, to: &'static str) -> Money {
+            // TODO
+            Money {
+                amount: 0,
+                currency: "USD",
+            }
+        }
+    }
+
+    pub struct Sum<'a, 'b>(&'a Money, &'b Money);
+
+    impl Sum<'_, '_> {
+        pub fn new<'a, 'b>(augend: &'a Money, addend: &'b Money) -> Sum<'a, 'b> {
+            Sum(augend, addend)
+        }
+    }
+
+    impl Expression for Sum<'_, '_> {
+        fn plus(&self, _addend: &Money) -> Box<dyn Expression> {
+            // TODO
             Box::new(Money {
-                amount: self.amount + addend.amount,
-                currency: self.currency,
+                amount: 0,
+                currency: "USD",
             })
+        }
+
+        fn reduce(&self, to: &'static str) -> Money {
+            Money {
+                amount: self.0.amount + self.1.amount,
+                currency: to,
+            }
         }
     }
 
@@ -53,7 +84,7 @@ pub mod money {
         }
 
         pub fn reduce(&self, source: &dyn Expression, to: &'static str) -> Money {
-            Money::dollar(10)
+            source.reduce(to)
         }
     }
 }
