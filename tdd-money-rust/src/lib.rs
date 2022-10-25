@@ -99,6 +99,10 @@ pub mod money {
         }
 
         pub fn rate(&self, from: &'static str, to: &'static str) -> i32 {
+            if from == to {
+                return 1;
+            }
+
             self.rates[&(String::from(from), String::from(to))]
         }
     }

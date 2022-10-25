@@ -51,6 +51,12 @@ fn currency() {
 }
 
 #[test]
+fn identity_rate() {
+    let bank = money::Bank::new();
+    assert_eq!(1, bank.rate("USD", "USD"));
+}
+
+#[test]
 fn equality() {
     assert_eq!(money::Money::dollar(5), money::Money::dollar(5));
     assert_ne!(money::Money::dollar(5), money::Money::dollar(6));
