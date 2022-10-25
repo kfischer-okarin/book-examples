@@ -70,9 +70,9 @@ pub mod money {
             })
         }
 
-        fn reduce(&self, _bank: &Bank, to: &'static str) -> Money {
+        fn reduce(&self, bank: &Bank, to: &'static str) -> Money {
             Money {
-                amount: self.0.amount + self.1.amount,
+                amount: self.0.reduce(bank, to).amount + self.1.reduce(bank, to).amount,
                 currency: to,
             }
         }
