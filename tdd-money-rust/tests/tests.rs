@@ -18,6 +18,14 @@ fn simple_addition() {
 }
 
 #[test]
+fn reduce_money() {
+    let money = money::Money::dollar(3);
+    let bank = money::Bank::new();
+    let reduced = bank.reduce(&money, "USD");
+    assert_eq!(money::Money::dollar(3), reduced);
+}
+
+#[test]
 fn reduce_sum() {
     let augend = money::Money::dollar(3);
     let addend = money::Money::dollar(4);

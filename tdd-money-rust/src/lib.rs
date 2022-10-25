@@ -43,10 +43,9 @@ pub mod money {
         }
 
         fn reduce(&self, to: &'static str) -> Money {
-            // TODO
             Money {
-                amount: 0,
-                currency: "USD",
+                amount: self.amount,
+                currency: to,
             }
         }
     }
