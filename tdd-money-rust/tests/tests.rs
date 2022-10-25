@@ -18,6 +18,19 @@ fn simple_addition() {
 }
 
 #[test]
+fn mixed_addition() {
+    let five_bucks = money::Money::dollar(5);
+    let ten_francs = money::Money::franc(10);
+    let mut bank = money::Bank::new();
+    bank.add_rate("CHF", "USD", 2);
+
+    let sum = five_bucks.plus(&ten_francs);
+    let result = bank.reduce(&*sum, "USD");
+
+    assert_eq!(money::Money::dollar(10), result);
+}
+
+#[test]
 fn reduce_money() {
     let money = money::Money::dollar(3);
     let bank = money::Bank::new();
