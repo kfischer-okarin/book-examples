@@ -26,6 +26,15 @@ fn reduce_money() {
 }
 
 #[test]
+fn reduce_money_different_currency() {
+    let bank = money::Bank::new();
+    bank.add_rate("CHF", "USD", 2);
+    let money = money::Money::franc(2);
+    let reduced = bank.reduce(&money, "USD");
+    assert_eq!(money::Money::dollar(1), reduced);
+}
+
+#[test]
 fn reduce_sum() {
     let augend = money::Money::dollar(3);
     let addend = money::Money::dollar(4);
