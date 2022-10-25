@@ -1,7 +1,7 @@
 pub mod money {
     pub trait Expression {
         fn plus<'a>(&'a self, addend: &'a Money) -> Box<dyn Expression + 'a>;
-        fn reduce(&self, to: &'static str) -> Money;
+        fn reduce<'a>(&self, bank: &'a Bank, to: &'static str) -> Money;
     }
 
     #[derive(Debug, PartialEq)]
@@ -42,12 +42,8 @@ pub mod money {
             Box::new(Sum::new(self, addend))
         }
 
-        fn reduce(&self, to: &'static str) -> Money {
-            let rate = if self.currency == "CHF" && to == "USD" {
-                2
-            } else {
-                1
-            };
+        fn reduce(&self, bank: &Bank, to: &'static str) -> Money {
+            let rate = bank.rate(self.currency, to);
             Money {
                 amount: self.amount / rate,
                 currency: to,
@@ -72,7 +68,7 @@ pub mod money {
             })
         }
 
-        fn reduce(&self, to: &'static str) -> Money {
+        fn reduce(&self, _bank: &Bank, to: &'static str) -> Money {
             Money {
                 amount: self.0.amount + self.1.amount,
                 currency: to,
@@ -88,9 +84,17 @@ pub mod money {
         }
 
         pub fn reduce(&self, source: &dyn Expression, to: &'static str) -> Money {
-            source.reduce(to)
+            source.reduce(self, to)
         }
 
         pub fn add_rate(&self, _from: &'static str, _to: &'static str, _rate: i32) {}
+
+        pub fn rate(&self, from: &'static str, to: &'static str) -> i32 {
+            if from == "CHF" && to == "USD" {
+                2
+            } else {
+                1
+            }
+        }
     }
 }
