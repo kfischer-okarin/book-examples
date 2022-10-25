@@ -27,7 +27,7 @@ fn reduce_money() {
 
 #[test]
 fn reduce_money_different_currency() {
-    let bank = money::Bank::new();
+    let mut bank = money::Bank::new();
     bank.add_rate("CHF", "USD", 2);
     let money = money::Money::franc(2);
     let reduced = bank.reduce(&money, "USD");

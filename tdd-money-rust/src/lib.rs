@@ -1,4 +1,6 @@
 pub mod money {
+    use std::collections::HashMap;
+
     pub trait Expression {
         fn plus<'a>(&'a self, addend: &'a Money) -> Box<dyn Expression + 'a>;
         fn reduce<'a>(&self, bank: &'a Bank, to: &'static str) -> Money;
@@ -76,25 +78,28 @@ pub mod money {
         }
     }
 
-    pub struct Bank {}
+    pub struct Bank {
+        rates: HashMap<(String, String), i32>,
+    }
 
     impl Bank {
         pub fn new() -> Bank {
-            Bank {}
+            Bank {
+                rates: HashMap::new(),
+            }
         }
 
         pub fn reduce(&self, source: &dyn Expression, to: &'static str) -> Money {
             source.reduce(self, to)
         }
 
-        pub fn add_rate(&self, _from: &'static str, _to: &'static str, _rate: i32) {}
+        pub fn add_rate(&mut self, from: &'static str, to: &'static str, _rate: i32) {
+            self.rates
+                .insert((String::from(from), String::from(to)), _rate);
+        }
 
         pub fn rate(&self, from: &'static str, to: &'static str) -> i32 {
-            if from == "CHF" && to == "USD" {
-                2
-            } else {
-                1
-            }
+            self.rates[&(String::from(from), String::from(to))]
         }
     }
 }
