@@ -53,10 +53,10 @@ pub mod money {
         }
     }
 
-    pub struct Sum<'a, 'b>(&'a Money, &'b Money);
+    pub struct Sum<'a, 'b>(&'a dyn Expression, &'b dyn Expression);
 
     impl Sum<'_, '_> {
-        pub fn new<'a, 'b>(augend: &'a Money, addend: &'b Money) -> Sum<'a, 'b> {
+        pub fn new<'a, 'b>(augend: &'a dyn Expression, addend: &'b dyn Expression) -> Sum<'a, 'b> {
             Sum(augend, addend)
         }
     }
