@@ -31,6 +31,20 @@ fn mixed_addition() {
 }
 
 #[test]
+fn sum_plus_money() {
+    let five_bucks = money::Money::dollar(5);
+    let ten_francs = money::Money::franc(10);
+    let mut bank = money::Bank::new();
+    bank.add_rate("CHF", "USD", 2);
+
+    let sum = five_bucks.plus(&ten_francs);
+    let sum = sum.plus(&five_bucks);
+    let result = bank.reduce(&*sum, "USD");
+
+    assert_eq!(money::Money::dollar(15), result);
+}
+
+#[test]
 fn reduce_money() {
     let money = money::Money::dollar(3);
     let bank = money::Bank::new();
