@@ -4,6 +4,20 @@ pub mod money {
     pub trait Expression {
         fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a>;
         fn reduce(&self, bank: &Bank, to: &'static str) -> Money;
+        fn as_money(&self) -> Option<&Money> {
+            None
+        }
+    }
+
+    impl core::fmt::Debug for dyn Expression {
+        fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+            let money = self.as_money();
+            if let Some(money) = money {
+                write!(f, "{:?}", money)
+            } else {
+                write!(f, "Sum")
+            }
+        }
     }
 
     #[derive(Debug, PartialEq)]
@@ -49,6 +63,19 @@ pub mod money {
             Money {
                 amount: self.amount / rate,
                 currency: to,
+            }
+        }
+
+        fn as_money(&self) -> Option<&Money> {
+            Some(self)
+        }
+    }
+
+    impl PartialEq<dyn Expression> for Money {
+        fn eq(&self, other: &dyn Expression) -> bool {
+            match other.as_money() {
+                Some(other) => self == other,
+                None => false,
             }
         }
     }
