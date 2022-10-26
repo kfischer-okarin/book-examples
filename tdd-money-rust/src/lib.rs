@@ -45,11 +45,11 @@ pub mod money {
             self.currency
         }
 
-        pub fn times(&self, multiplier: i32) -> Money {
-            Money {
+        pub fn times(&self, multiplier: i32) -> Box<dyn Expression> {
+            Box::new(Money {
                 amount: self.amount * multiplier,
                 currency: self.currency,
-            }
+            })
         }
     }
 

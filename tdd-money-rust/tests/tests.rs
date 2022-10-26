@@ -4,8 +4,8 @@ use tdd_money_rust::money::Expression;
 #[test]
 fn multiplication() {
     let five = money::Money::dollar(5);
-    assert_eq!(money::Money::dollar(10), five.times(2));
-    assert_eq!(money::Money::dollar(15), five.times(3));
+    assert_eq!(money::Money::dollar(10), *five.times(2));
+    assert_eq!(money::Money::dollar(15), *five.times(3));
 }
 
 #[test]
