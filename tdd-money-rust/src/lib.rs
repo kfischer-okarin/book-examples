@@ -2,7 +2,7 @@ pub mod money {
     use std::collections::HashMap;
 
     pub trait Expression {
-        fn plus<'a>(&'a self, addend: &'a dyn Expression) -> Box<dyn Expression + 'a>;
+        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a>;
         fn reduce<'a>(&self, bank: &'a Bank, to: &'static str) -> Money;
     }
 
@@ -40,7 +40,7 @@ pub mod money {
     }
 
     impl Expression for Money {
-        fn plus<'a>(&'a self, addend: &'a dyn Expression) -> Box<dyn Expression + 'a> {
+        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
             Box::new(Sum::new(self, addend))
         }
 
@@ -62,7 +62,7 @@ pub mod money {
     }
 
     impl Expression for Sum<'_, '_> {
-        fn plus(&self, _addend: &dyn Expression) -> Box<dyn Expression> {
+        fn plus<'a, 'b: 'a>(&'a self, _addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
             // TODO
             Box::new(Money {
                 amount: 0,
