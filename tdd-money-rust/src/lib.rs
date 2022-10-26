@@ -89,12 +89,8 @@ pub mod money {
     }
 
     impl Expression for Sum<'_, '_> {
-        fn plus<'a, 'b: 'a>(&'a self, _addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
-            // TODO
-            Box::new(Money {
-                amount: 0,
-                currency: "USD",
-            })
+        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
+            Box::new(Sum(self, addend))
         }
 
         fn reduce(&self, bank: &Bank, to: &'static str) -> Money {
