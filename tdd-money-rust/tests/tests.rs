@@ -45,6 +45,20 @@ fn sum_plus_money() {
 }
 
 #[test]
+fn sum_times() {
+    let five_bucks = money::Money::dollar(5);
+    let ten_francs = money::Money::franc(10);
+    let mut bank = money::Bank::new();
+    bank.add_rate("CHF", "USD", 2);
+
+    let sum = five_bucks.plus(&ten_francs);
+    let product = sum.times(2);
+    let result = bank.reduce(&product, "USD");
+
+    assert_eq!(money::Money::dollar(20), result);
+}
+
+#[test]
 fn reduce_money() {
     let money = money::Money::dollar(3);
     let bank = money::Bank::new();
