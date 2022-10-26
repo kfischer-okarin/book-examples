@@ -3,7 +3,7 @@ pub mod money {
 
     pub trait Expression {
         fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a>;
-        fn reduce<'a>(&self, bank: &'a Bank, to: &'static str) -> Money;
+        fn reduce(&self, bank: &Bank, to: &'static str) -> Money;
     }
 
     #[derive(Debug, PartialEq)]
