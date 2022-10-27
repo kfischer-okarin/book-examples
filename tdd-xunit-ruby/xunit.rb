@@ -5,7 +5,7 @@ class WasRun
   end
 
   def run
-    test_method
+    send(@name)
   end
 
   def was_run?
