@@ -7,13 +7,8 @@ class WasRun < TestCase
     @was_run
   end
 
-  def was_set_up?
-    @was_set_up
-  end
-
   def set_up
     @was_run = false
-    @was_set_up = true
     @log = 'set_up '
   end
 
