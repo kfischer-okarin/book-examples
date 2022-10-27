@@ -1,9 +1,12 @@
-class TestCase; end
+class TestCase
+  def initialize(name)
+    @name = name
+  end
+end
 
 class WasRun < TestCase
   def initialize(name)
-    super()
-    @name = name
+    super
     @was_run = false
   end
 
