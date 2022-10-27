@@ -4,10 +4,19 @@ class WasRun < TestCase
   def initialize(name)
     super
     @was_run = false
+    @was_set_up = false
   end
 
   def was_run?
     @was_run
+  end
+
+  def was_set_up?
+    @was_set_up
+  end
+
+  def set_up
+    @was_set_up = true
   end
 
   def test_method
