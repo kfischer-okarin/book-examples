@@ -1,6 +1,8 @@
 require_relative 'xunit'
 
 class WasRun < TestCase
+  attr_reader :log
+
   def was_run?
     @was_run
   end
@@ -12,6 +14,7 @@ class WasRun < TestCase
   def set_up
     @was_run = false
     @was_set_up = true
+    @log = 'set_up '
   end
 
   def test_method
@@ -32,7 +35,7 @@ class TestCaseTest < TestCase
 
   def test_set_up
     @test.run
-    assert! @test.was_set_up?
+    assert! @test.log == 'set_up '
   end
 end
 
