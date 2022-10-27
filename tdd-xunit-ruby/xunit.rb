@@ -2,16 +2,16 @@ class TestCase
   def initialize(name)
     @name = name
   end
+
+  def run
+    send(@name)
+  end
 end
 
 class WasRun < TestCase
   def initialize(name)
     super
     @was_run = false
-  end
-
-  def run
-    send(@name)
   end
 
   def was_run?
