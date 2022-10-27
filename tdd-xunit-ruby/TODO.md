@@ -1,5 +1,5 @@
 - [x] Invoke test method
-- [ ] Invoke set_up first
+- [x] Invoke set_up first
 - [ ] Invoke tear_down afterwards
 - [ ] Invoke tear_down even if the test method fails
 - [ ] Run multiple tests
