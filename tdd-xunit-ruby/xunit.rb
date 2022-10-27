@@ -4,6 +4,10 @@ class WasRun
     @was_run = false
   end
 
+  def run
+    test_method
+  end
+
   def was_run?
     @was_run
   end
