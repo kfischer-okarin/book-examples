@@ -1,26 +1,17 @@
 pub mod money {
     use std::collections::HashMap;
 
-    pub trait Expression {
-        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a>;
+    pub trait Expression: Clone {
+        fn plus<T: Expression>(&self, addend: &T) -> Sum<Self, T> {
+            Sum(self.clone(), addend.clone())
+        }
+
+        fn times(&self, factor: i32) -> Self;
+
         fn reduce(&self, bank: &Bank, to: &'static str) -> Money;
-        fn as_money(&self) -> Option<&Money> {
-            None
-        }
     }
 
-    impl core::fmt::Debug for dyn Expression {
-        fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-            let money = self.as_money();
-            if let Some(money) = money {
-                write!(f, "{:?}", money)
-            } else {
-                write!(f, "Sum")
-            }
-        }
-    }
-
-    #[derive(Debug, PartialEq)]
+    #[derive(Debug, PartialEq, Clone)]
     pub struct Money {
         amount: i32,
         currency: &'static str,
@@ -44,53 +35,36 @@ pub mod money {
         pub fn currency(&self) -> &str {
             self.currency
         }
-
-        pub fn times(&self, multiplier: i32) -> Box<dyn Expression> {
-            Box::new(Money {
-                amount: self.amount * multiplier,
-                currency: self.currency,
-            })
-        }
     }
 
     impl Expression for Money {
-        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
-            Box::new(Sum::new(self, addend))
+        fn times(&self, factor: i32) -> Money {
+            Money {
+                amount: self.amount * factor,
+                currency: self.currency,
+            }
         }
 
         fn reduce(&self, bank: &Bank, to: &'static str) -> Money {
-            let rate = bank.rate(self.currency, to);
             Money {
-                amount: self.amount / rate,
+                amount: self.amount / bank.rate(self.currency, to),
                 currency: to,
             }
         }
-
-        fn as_money(&self) -> Option<&Money> {
-            Some(self)
-        }
     }
 
-    impl PartialEq<dyn Expression> for Money {
-        fn eq(&self, other: &dyn Expression) -> bool {
-            match other.as_money() {
-                Some(other) => self == other,
-                None => false,
-            }
-        }
-    }
+    #[derive(Clone)]
+    pub struct Sum<T: Expression, U: Expression>(T, U);
 
-    pub struct Sum<'a, 'b>(&'a dyn Expression, &'b dyn Expression);
-
-    impl Sum<'_, '_> {
-        pub fn new<'a, 'b>(augend: &'a dyn Expression, addend: &'b dyn Expression) -> Sum<'a, 'b> {
+    impl<T: Expression, U: Expression> Sum<T, U> {
+        pub fn new(augend: T, addend: U) -> Sum<T, U> {
             Sum(augend, addend)
         }
     }
 
-    impl Expression for Sum<'_, '_> {
-        fn plus<'a, 'b: 'a>(&'a self, addend: &'b dyn Expression) -> Box<dyn Expression + 'a> {
-            Box::new(Sum(self, addend))
+    impl<T: Expression, U: Expression> Expression for Sum<T, U> {
+        fn times(&self, factor: i32) -> Sum<T, U> {
+            Sum(self.0.times(factor), self.1.times(factor))
         }
 
         fn reduce(&self, bank: &Bank, to: &'static str) -> Money {
@@ -112,7 +86,7 @@ pub mod money {
             }
         }
 
-        pub fn reduce(&self, source: &dyn Expression, to: &'static str) -> Money {
+        pub fn reduce<T: Expression>(&self, source: &T, to: &'static str) -> Money {
             source.reduce(self, to)
         }
 

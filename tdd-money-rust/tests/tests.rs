@@ -4,8 +4,8 @@ use tdd_money_rust::money::Expression;
 #[test]
 fn multiplication() {
     let five = money::Money::dollar(5);
-    assert_eq!(money::Money::dollar(10), *five.times(2));
-    assert_eq!(money::Money::dollar(15), *five.times(3));
+    assert_eq!(money::Money::dollar(10), five.times(2));
+    assert_eq!(money::Money::dollar(15), five.times(3));
 }
 
 #[test]
@@ -13,7 +13,7 @@ fn simple_addition() {
     let five = money::Money::dollar(5);
     let sum = five.plus(&five);
     let bank = money::Bank::new();
-    let reduced = bank.reduce(&*sum, "USD");
+    let reduced = bank.reduce(&sum, "USD");
     assert_eq!(money::Money::dollar(10), reduced);
 }
 
@@ -25,7 +25,7 @@ fn mixed_addition() {
     bank.add_rate("CHF", "USD", 2);
 
     let sum = five_bucks.plus(&ten_francs);
-    let result = bank.reduce(&*sum, "USD");
+    let result = bank.reduce(&sum, "USD");
 
     assert_eq!(money::Money::dollar(10), result);
 }
@@ -39,7 +39,7 @@ fn sum_plus_money() {
 
     let sum = five_bucks.plus(&ten_francs);
     let sum = sum.plus(&five_bucks);
-    let result = bank.reduce(&*sum, "USD");
+    let result = bank.reduce(&sum, "USD");
 
     assert_eq!(money::Money::dollar(15), result);
 }
@@ -65,7 +65,7 @@ fn reduce_money_different_currency() {
 fn reduce_sum() {
     let augend = money::Money::dollar(3);
     let addend = money::Money::dollar(4);
-    let sum = money::Sum::new(&augend, &addend);
+    let sum = money::Sum::new(augend, addend);
     let bank = money::Bank::new();
     let reduced = bank.reduce(&sum, "USD");
     assert_eq!(money::Money::dollar(7), reduced);
