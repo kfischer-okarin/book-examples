@@ -14,6 +14,7 @@ class WasRun < TestCase
 
   def test_method
     @was_run = true
+    @log += 'test_method '
   end
 end
 
@@ -30,7 +31,7 @@ class TestCaseTest < TestCase
 
   def test_set_up
     @test.run
-    assert! @test.log == 'set_up '
+    assert! @test.log == 'set_up test_method '
   end
 end
 
