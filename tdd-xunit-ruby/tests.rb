@@ -15,7 +15,13 @@ class WasRun < TestCase
   end
 end
 
-test = WasRun.new('test_method')
-puts test.was_run?
-test.run
-puts test.was_run?
+class TestCaseTest < TestCase
+  def test_running
+    test = WasRun.new('test_method')
+    assert! !test.was_run?
+    test.run
+    assert! test.was_run?
+  end
+end
+
+TestCaseTest.new('test_running').run
