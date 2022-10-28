@@ -3,17 +3,11 @@ require_relative 'xunit'
 class WasRun < TestCase
   attr_reader :log
 
-  def was_run?
-    @was_run
-  end
-
   def set_up
-    @was_run = false
     @log = 'set_up '
   end
 
   def test_method
-    @was_run = true
     @log += 'test_method '
   end
 end
