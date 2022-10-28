@@ -1,6 +1,6 @@
 - [x] Invoke test method
 - [x] Invoke set_up first
-- [ ] Invoke tear_down afterwards
+- [x] Invoke tear_down afterwards
 - [ ] Invoke tear_down even if the test method fails
 - [ ] Run multiple tests
 - [ ] Report collected results

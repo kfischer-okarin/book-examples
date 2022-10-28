@@ -7,9 +7,12 @@ class TestCase
 
   def set_up; end
 
+  def tear_down; end
+
   def run
     set_up
     send(@name)
+    tear_down
   end
 
   def assert!(value)
