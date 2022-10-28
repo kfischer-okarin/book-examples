@@ -16,7 +16,7 @@ class TestCaseTest < TestCase
   def test_template_method
     test = WasRun.new('test_method')
     test.run
-    assert! test.log == 'set_up test_method '
+    assert! test.log == 'set_up test_method tear_down '
   end
 end
 
