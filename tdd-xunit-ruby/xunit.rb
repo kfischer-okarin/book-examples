@@ -1,3 +1,19 @@
+class TestSuite
+  def initialize
+    @tests = []
+  end
+
+  def add(test)
+    @tests << test
+  end
+
+  def run(result)
+    @tests.each do |test|
+      test.run result
+    end
+  end
+end
+
 class TestCase
   class AssertionFailed < StandardError; end
 
@@ -9,8 +25,7 @@ class TestCase
 
   def tear_down; end
 
-  def run
-    result = TestResult.new
+  def run(result)
     result.test_started
     set_up
     begin
@@ -19,7 +34,6 @@ class TestCase
       result.test_failed
     end
     tear_down
-    result
   end
 
   def assert!(value)
