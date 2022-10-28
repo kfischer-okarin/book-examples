@@ -10,10 +10,12 @@ class TestCase
   def tear_down; end
 
   def run
+    result = TestResult.new
+    result.test_started
     set_up
     send(@name)
     tear_down
-    TestResult.new
+    result
   end
 
   def assert!(value)
@@ -23,7 +25,11 @@ end
 
 class TestResult
   def initialize
-    @run_count = 1
+    @run_count = 0
+  end
+
+  def test_started
+    @run_count += 1
   end
 
   def summary
