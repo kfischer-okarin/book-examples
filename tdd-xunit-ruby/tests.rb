@@ -14,6 +14,10 @@ class WasRun < TestCase
   def test_method
     @log += 'test_method '
   end
+
+  def test_broken_method
+    raise
+  end
 end
 
 class TestCaseTest < TestCase

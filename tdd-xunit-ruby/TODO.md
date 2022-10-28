@@ -3,5 +3,6 @@
 - [x] Invoke tear_down afterwards
 - [ ] Invoke tear_down even if the test method fails
 - [ ] Run multiple tests
-- [ ] Report collected results
+- [x] Report collected results
 - [x] Log string in WasRun
+- [ ] Report failed tests
