@@ -23,10 +23,10 @@ class TestCaseTest < TestCase
     @test = WasRun.new('test_method')
   end
 
-  def test_set_up
+  def test_template_method
     @test.run
     assert! @test.log == 'set_up test_method '
   end
 end
 
-TestCaseTest.new('test_set_up').run
+TestCaseTest.new('test_template_method').run
