@@ -38,8 +38,16 @@ class TestCaseTest < TestCase
     result = test.run
     assert! result.summary == '1 run, 1 failed'
   end
+
+  def test_failed_result_formatting
+    result = TestResult.new
+    result.test_started
+    result.test_failed
+    assert! result.summary == '1 run, 1 failed'
+  end
 end
 
 TestCaseTest.new('test_template_method').run
 TestCaseTest.new('test_result').run
+TestCaseTest.new('test_failed_result_formatting').run
 # TestCaseTest.new('test_failed_result').run
