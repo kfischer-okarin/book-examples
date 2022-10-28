@@ -22,7 +22,11 @@ class TestCase
 end
 
 class TestResult
+  def initialize
+    @run_count = 1
+  end
+
   def summary
-    '1 run, 0 failed'
+    "#{@run_count} run, 0 failed"
   end
 end
