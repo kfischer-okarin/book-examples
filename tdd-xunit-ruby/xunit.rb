@@ -13,9 +13,16 @@ class TestCase
     set_up
     send(@name)
     tear_down
+    TestResult.new
   end
 
   def assert!(value)
     raise AssertionFailed, 'Assertion failed' unless value
+  end
+end
+
+class TestResult
+  def summary
+    '1 run, 0 failed'
   end
 end
