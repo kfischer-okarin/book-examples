@@ -22,6 +22,13 @@ class TestCaseTest < TestCase
     test.run
     assert! test.log == 'set_up test_method tear_down '
   end
+
+  def test_result
+    test = WasRun.new('test_method')
+    result = test.run
+    assert! result.summary == '1 run, 0 failed'
+  end
 end
 
 TestCaseTest.new('test_template_method').run
+TestCaseTest.new('test_result').run
