@@ -21,40 +21,40 @@ class WasRun < TestCase
 end
 
 class TestCaseTest < TestCase
+  def set_up
+    @result = TestResult.new
+  end
+
   def test_template_method
     test = WasRun.new('test_method')
-    test.run TestResult.new
+    test.run @result
     assert! test.log == 'set_up test_method tear_down '
   end
 
   def test_result
     test = WasRun.new('test_method')
-    result = TestResult.new
-    test.run result
-    assert! result.summary == '1 run, 0 failed'
+    test.run @result
+    assert! @result.summary == '1 run, 0 failed'
   end
 
   def test_failed_result
     test = WasRun.new('test_broken_method')
-    result = TestResult.new
-    test.run result
-    assert! result.summary == '1 run, 1 failed'
+    test.run @result
+    assert! @result.summary == '1 run, 1 failed'
   end
 
   def test_failed_result_formatting
-    result = TestResult.new
-    result.test_started
-    result.test_failed
-    assert! result.summary == '1 run, 1 failed'
+    @result.test_started
+    @result.test_failed
+    assert! @result.summary == '1 run, 1 failed'
   end
 
   def test_suite
     suite = TestSuite.new
     suite.add WasRun.new('test_method')
     suite.add WasRun.new('test_broken_method')
-    result = TestResult.new
-    suite.run result
-    assert! result.summary == '2 run, 1 failed'
+    suite.run @result
+    assert! @result.summary == '2 run, 1 failed'
   end
 end
 
