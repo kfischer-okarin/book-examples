@@ -60,7 +60,7 @@ void quick_sort(size_t size, double input[size], double output[size]) {
 
     if (input[i] <= pivot) {
       ++size_left;
-    }e
+    }
   }
   size_t size_right = size - size_left - 1;
 
