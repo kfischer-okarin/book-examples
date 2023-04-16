@@ -10,7 +10,7 @@ void print_array(size_t size, double array[size]) {
       printf(", ");
     }
   }
-  printf("]\n");
+  puts("]");
 }
 
 void merge_sort(size_t size, double input[size], double output[size]) {
@@ -105,9 +105,9 @@ void quick_sort(size_t size, double input[size], double output[size]) {
 int assert_arrays_equal(size_t size, double array1[size], double array2[size]) {
   for (int i = 0; i < size; ++i) {
     if (array1[i] != array2[i]) {
-      printf("Array:\n");
+      puts("Array:");
       print_array(size, array1);
-      printf("was not equal to:\n");
+      puts("was not equal to:");
       print_array(size, array2);
       return EXIT_FAILURE;
     }
